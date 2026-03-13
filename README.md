@@ -47,3 +47,43 @@ As part of the assignment requirements to provide reasoning, here are the key te
    Used the bash parameter expansion `PORT=${2:-80}` to cleanly assign a default value without requiring complex `if-else` blocks, keeping the script lightweight and readable.
 
 
+# Challenge 2: Next.js Dockerization
+
+## Overview
+This section contains the containerization of a Next.js application. The implementation focuses on creating a highly optimized, lightweight, and production-ready Docker image using a Multi-stage build.
+
+## Prerequisites
+- Docker Engine
+- Docker Compose
+
+## How to Run
+1. Navigate to the project directory containing the `docker-compose.yml` file.
+2. Build and start the container in detached mode:
+   ```bash
+   docker compose up -d --build
+   ```
+3. Open your web browser and access the application at:
+   **http://localhost:8080**
+   *(You should see the "Hello, Docker!" heading).*
+
+4. To stop the container:
+   ```bash
+   docker compose down
+   ```
+
+## Architecture & Reasoning Decisions
+
+The following technical decisions were made:
+
+1. **Multi-stage Build & Alpine Image (`node:20-alpine`)**
+   The `Dockerfile` is separated into three stages: `deps`, `builder`, and `runner`. 
+   *Reasoning:* This prevents development dependencies, source code, and NPM cache from bloating the final production image. Node 20 is used to satisfy the requirements of the latest Next.js version.
+
+2. **Next.js Standalone Mode (`next.config.js`)**
+   The configuration `output: 'standalone'` was explicitly added to Next.js.
+   *Reasoning:* By default, Next.js requires the heavy `node_modules` folder to run. The standalone mode intelligently traces imports and copies only the necessary files into a `.next/standalone` folder to reduces the final image size.
+
+3. **Docker Compose Configuration**
+   - **Port Mapping (`8080:3000`):** The application runs on port 3000 inside the container, but is mapped to port 8080 on the host machine.
+   - **Restart Policy (`unless-stopped`):** If the application crashes or the host server restarts, Docker will automatically bring the container back online.
+   - **Environment Variable (`NODE_ENV=production`):** Enforces Next.js to run in production mode.
