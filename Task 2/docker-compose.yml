@@ -1,0 +1,13 @@
+# version: '3.8'
+
+services:
+  next-webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bobobox-next-app
+    ports:
+      - "8080:3000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
