@@ -25,7 +25,7 @@ The script requires at least one argument (Target IP/Hostname). The port argumen
    `./health_check.sh localhost 80`
    
 2. Running without a port (will default to port 80):
-   `./health_check.sh 192.168.1.50`
+   `./health_check.sh 10.20.30.40`
 
 3. Handling missing arguments:
    `./health_check.sh`
