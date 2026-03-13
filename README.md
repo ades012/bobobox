@@ -2,7 +2,7 @@
 
 # TASK 1 : Server health check automation
 
-This repo contains `health_check.sh`, a Bash script designed to automate basic server health monitoring.
+This repo contains `health_check.sh`, a Bash script designed to automate basic server health monitoring. [cite_start]It performs connectivity checks, verifies web service availability, and reports the root filesystem's disk usage[cite: 8, 11, 14, 16]. [cite_start]All results are logged with timestamps for auditing purposes[cite: 17].
 
 ## Prerequisites
 Ensure the environment running this script has the following standard Linux utilities installed:
