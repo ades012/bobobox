@@ -20,3 +20,13 @@
 [2026-03-13 11:08:06] Server 10.11.1.20 is reachable.
 [2026-03-13 11:08:06] Web service on port 80 is UP.
 [2026-03-13 11:08:06] Disk usage on / is 2%.
+[2026-03-13 11:31:00] Server localhost is reachable.
+[2026-03-13 11:31:00] Web service on port 80 is DOWN.
+[2026-03-13 11:31:00] Disk usage on / is 2%.
+[2026-03-13 11:31:09] Server 10.11.1.20 is reachable.
+[2026-03-13 11:31:09] Web service on port 80 is UP.
+[2026-03-13 11:31:09] Disk usage on / is 2%.
+[2026-03-13 11:31:18] Server 10.20.30.40 is unreachable.
+[2026-03-13 11:40:01] Server google.com is reachable.
+[2026-03-13 11:40:02] Web service on port 80 is UP.
+[2026-03-13 11:40:02] Disk usage on / is 2%.
