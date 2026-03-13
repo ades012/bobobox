@@ -47,7 +47,7 @@ As part of the assignment requirements to provide reasoning, here are the key te
    Used the bash parameter expansion `PORT=${2:-80}` to cleanly assign a default value without requiring complex `if-else` blocks, keeping the script lightweight and readable.
 
 
-# Challenge 2: Next.js Dockerization
+# TASK 2: Next.js Dockerization
 
 ## Overview
 This section contains the containerization of a Next.js application. The implementation focuses on creating a highly optimized, lightweight, and production-ready Docker image using a Multi-stage build.
