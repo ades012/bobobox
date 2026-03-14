@@ -146,6 +146,8 @@ Ensure AWS CLI is authenticated and configured. Open terminal and run:
 aws configure
 ```
 *(Provide AWS Access Key, Secret Key, and set the default region, e.g., `ap-southeast-1`)*
+```
+```
 Setup S3 Bucket
 ```bash
 aws s3api create-bucket --bucket ades012-bobobox-tfstate --region ap-southeast-1 --create-bucket-configuration LocationConstraint=ap-southeast-1
