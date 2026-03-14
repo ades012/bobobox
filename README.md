@@ -104,7 +104,7 @@ The following technical decisions were made:
 # TASK 3: Infrastructure as Code (IaC) with OpenTofu
 
 ## Overview
-This repository contains an Infrastructure as Code (IaC) implementation using **OpenTofu** to provision a secure, highly-optimized, and observable Nginx web server on AWS.
+This repository contains an Infrastructure as Code (IaC) implementation using **OpenTofu**
 
 ## Topology & Network Diagram
 
