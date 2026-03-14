@@ -132,3 +132,81 @@ graph TD
     TF -- "1. Provision via AWS API" --> AWS
     TF -. "2. SSH / Remote Deploy" .-> EC2
 ```
+
+## Prerequisites
+1. **OpenTofu** (`tofu` CLI) installed.
+2. **AWS CLI** configured with appropriate IAM permissions.
+3. *Optional but Recommended:* S3 Bucket and DynamoDB table if you wish to initialize the remote backend for state locking.
+
+## Implementation & How-To Notes
+
+### Step 1: Authentication & Setup
+Ensure your AWS CLI is authenticated and configured. Open your terminal and run:
+```bash
+aws configure
+```
+*(Provide your AWS Access Key, Secret Key, and set the default region, e.g., `ap-southeast-1`)*
+
+### Step 2: Install OpenTofu
+Download the official installer
+```
+curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
+```
+
+grant execution permission
+```
+chmod +x install-opentofu.sh
+```
+
+Run the script to setup the repository for Debian/Ubuntu
+```
+./install-opentofu.sh --install-method deb
+```
+
+Install OpenTofu
+```
+sudo apt-get update && sudo apt-get install -y tofu
+```
+
+### Step 3: Initialize OpenTofu
+Initialize the working directory. This step downloads the required AWS provider plugins and configures the remote state backend (S3 & DynamoDB state locking).
+```bash
+tofu init
+```
+when the remote state backend has successful, the output look like this
+```
+Initializing the backend...
+
+Successfully configured the backend "s3"! OpenTofu will automatically
+use this backend unless the backend configuration changes.
+```
+
+### Step 4: Validate and Plan Configuration
+Validate the code syntax and preview the infrastructure changes OpenTofu will execute in your AWS environment.
+```bash
+tofu validate
+tofu plan
+```
+
+### Step 5: Apply and Provision Resources
+Deploy the infrastructure to AWS. OpenTofu will prompt for your confirmation before proceeding.
+```bash
+tofu apply
+```
+*(Type `yes` when prompted. Please wait 1-2 minutes for the EC2 instance to fully provision and the Nginx user_data script to finish executing).*
+
+### Step 6: Verify the Deployment
+Once the deployment is complete, OpenTofu will display the `instance_public_ip` in the terminal output. You can verify the web server is running by using `curl` or opening the IP in your web browser:
+```bash
+C:\Users\gngsp>curl 52.221.235.210
+<h1>Hello, OpenTofu!</h1>
+
+C:\Users\gngsp>
+```
+
+### Step 7: Teardown and Destroy Resources
+To prevent ongoing AWS Free Tier charges, safely clean up and destroy all provisioned resources once the evaluation is complete.
+```bash
+tofu destroy
+```
+*(Type `yes` when prompted. This will automatically and securely tear down the VPC, Security Groups, and the EC2 instance).*
