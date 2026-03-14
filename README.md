@@ -100,3 +100,40 @@ The following technical decisions were made:
    - **Port Mapping (`8080:3000`):** The application runs on port 3000 inside the container, but is mapped to port 8080 on the host machine.
    - **Restart Policy (`unless-stopped`):** If the application crashes or the host server restarts, Docker will automatically bring the container back online.
    - **Environment Variable (`NODE_ENV=production`):** Enforces Next.js to run in production mode.
+
+# Challenge 3: Infrastructure as Code (IaC) with OpenTofu
+
+## Overview
+This repository contains an Infrastructure as Code (IaC) implementation using **OpenTofu** to provision a secure, highly-optimized, and observable Nginx web server on AWS.
+
+## Topology & Network Diagram
+
+```mermaid
+graph TD
+    Internet((🌐 Internet)) --> IGW[🚪 AWS Internet Gateway]
+
+    subgraph AWS VPC [☁️ VPC: 10.0.0.0/16]
+        IGW --> Router[Route Table]
+
+        subgraph Public Subnet [🌐 Public Subnet: 10.0.101.0/24]
+            Router --> SG{🛡️ Security Group}
+
+            SG -- "Port 80 (HTTP)" --> EC2
+            SG -- "Port 22 (SSH)" --> EC2
+            SG -- "Port 9100 (Metrics)" --> EC2
+
+            EC2[💻 EC2 Instance: t2.micro]
+
+            EC2 --- Nginx[🖥️ Nginx: 'Hello, OpenTofu!']
+            EC2 --- Node[📊 Node Exporter]
+        end
+    end
+
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef vpc fill:#fff3e0,stroke:#ff9800,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef subnet fill:#e3f2fd,stroke:#2196f3,stroke-width:2px;
+    
+    class AWS VPC vpc;
+    class Public Subnet subnet;
+```
+
