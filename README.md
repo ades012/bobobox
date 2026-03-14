@@ -170,6 +170,7 @@ sudo apt-get update && sudo apt-get install -y tofu
 
 ### Step 3: Initialize OpenTofu
 Initialize the working directory. This step downloads the required AWS provider plugins and configures the remote state backend.
+the Terraform State is configured to be stored remotely in an **AWS S3 Bucket** with state locking via **DynamoDB**. This prevents sensitive infrastructure data and state files from being exposed in local plaintext
 ```bash
 tofu init
 ```
