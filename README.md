@@ -147,9 +147,13 @@ aws configure
 ```
 *(Provide AWS Access Key, Secret Key, and set the default region, e.g., `ap-southeast-1`)*
 Setup S3 Bucket
-`aws s3api create-bucket --bucket ades012-bobobox-tfstate --region ap-southeast-1 --create-bucket-configuration LocationConstraint=ap-southeast-1`
+```bash
+aws s3api create-bucket --bucket ades012-bobobox-tfstate --region ap-southeast-1 --create-bucket-configuration LocationConstraint=ap-southeast-1
+```
 Setup DynamoDB Table
-`aws dynamodb create-table --table-name terraform-state-lock --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --billing-mode PAY_PER_REQUEST --region ap-southeast-1`
+```bash
+aws dynamodb create-table --table-name terraform-state-lock --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --billing-mode PAY_PER_REQUEST --region ap-southeast-1
+```
 
 ### Step 2: Install OpenTofu
 Download the official installer
