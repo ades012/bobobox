@@ -182,7 +182,7 @@ use this backend unless the backend configuration changes.
 ```
 
 ### Step 4: Validate and Plan Configuration
-I prefer use tofu validate to validate the code syntax, then use tofu plan to preview the infrastructure changes OpenTofu will execute.
+I prefer use `tofu validate` to validate the code syntax, then use `tofu plan` to preview the infrastructure changes OpenTofu will execute.
 ```bash
 tofu validate
 tofu plan
