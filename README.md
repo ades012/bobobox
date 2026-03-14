@@ -111,7 +111,8 @@ This repository contains an Infrastructure as Code (IaC) implementation using **
 ```mermaid
 graph TD
     subgraph Internet ["Internet"]
-    
+    end
+
     subgraph Laptop ["Developer Laptop"]
         TF[Terraform CLI]
     end
@@ -122,7 +123,6 @@ graph TD
             
             subgraph Public ["Public Subnet"]
                 EC2[EC2 Web Server]
-                IGW[Internet Gateway]
             end
             
             Internet --- IGW
@@ -132,6 +132,6 @@ graph TD
 
     %% Workflows
     TF -- "2. Provision via AWS API" --> VPC
-    GR -- "3. SSH / Remote Deploy" --> EC2
+    TF -- "3. SSH / Remote Deploy" --> EC2
 ```
 
