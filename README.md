@@ -56,6 +56,19 @@ This section contains the containerization of a Next.js application. The impleme
 - Docker Engine
 - Docker Compose
 
+## Directory Structure
+```text
+.
+├── app/
+│   ├── pages/
+│   │   └── index.js
+│   ├── next.config.js
+│   └── package.json
+├── docker-compose.yml
+├── Dockerfile
+└── README.md
+```
+
 ## How to Run
 1. Navigate to the project directory containing the `docker-compose.yml` file.
 2. Build and start the container in detached mode:
