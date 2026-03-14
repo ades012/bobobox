@@ -110,30 +110,28 @@ This repository contains an Infrastructure as Code (IaC) implementation using **
 
 ```mermaid
 graph TD
-    Internet((🌐 Internet)) --> IGW[🚪 AWS Internet Gateway]
+    subgraph Internet ["Internet"]
+    
+    subgraph Laptop ["Developer Laptop"]
+        TF[Terraform CLI]
+    end
 
-    subgraph AWS VPC [☁️ VPC: 10.0.0.0/16]
-        IGW --> Router[Route Table]
-
-        subgraph Public Subnet [🌐 Public Subnet: 10.0.101.0/24]
-            Router --> SG{🛡️ Security Group}
-
-            SG -- "Port 80 (HTTP)" --> EC2
-            SG -- "Port 22 (SSH)" --> EC2
-            SG -- "Port 9100 (Metrics)" --> EC2
-
-            EC2[💻 EC2 Instance: t2.micro]
-
-            EC2 --- Nginx[🖥️ Nginx: 'Hello, OpenTofu!']
-            EC2 --- Node[📊 Node Exporter]
+    subgraph AWS ["AWS Cloud Environment"]
+        subgraph VPC ["AWS VPC (10.0.0.0/16)"]
+            IGW[Internet Gateway]
+            
+            subgraph Public ["Public Subnet"]
+                EC2[EC2 Web Server]
+                IGW[Internet Gateway]
+            end
+            
+            Internet --- IGW
+            IGW == "HTTP/HTTPS Traffic" === EC2
         end
     end
 
-    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    classDef vpc fill:#fff3e0,stroke:#ff9800,stroke-width:2px,stroke-dasharray: 5 5;
-    classDef subnet fill:#e3f2fd,stroke:#2196f3,stroke-width:2px;
-    
-   class vpc_network vpcStyle;
-   class public_subnet subnetStyle;   
+    %% Workflows
+    TF -- "2. Provision via AWS API" --> VPC
+    GR -- "3. SSH / Remote Deploy" --> EC2
 ```
 
