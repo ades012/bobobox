@@ -101,7 +101,7 @@ The following technical decisions were made:
    - **Restart Policy (`unless-stopped`):** If the application crashes or the host server restarts, Docker will automatically bring the container back online.
    - **Environment Variable (`NODE_ENV=production`):** Enforces Next.js to run in production mode.
 
-# Challenge 3: Infrastructure as Code (IaC) with OpenTofu
+# TASK 3: Infrastructure as Code (IaC) with OpenTofu
 
 ## Overview
 This repository contains an Infrastructure as Code (IaC) implementation using **OpenTofu** to provision a secure, highly-optimized, and observable Nginx web server on AWS.
