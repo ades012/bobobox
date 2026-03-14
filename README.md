@@ -133,7 +133,7 @@ graph TD
     classDef vpc fill:#fff3e0,stroke:#ff9800,stroke-width:2px,stroke-dasharray: 5 5;
     classDef subnet fill:#e3f2fd,stroke:#2196f3,stroke-width:2px;
     
-    class AWS VPC vpc;
-    class Public Subnet subnet;
+   class vpc_network vpcStyle;
+   class public_subnet subnetStyle;   
 ```
 
