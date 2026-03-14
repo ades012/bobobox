@@ -75,7 +75,7 @@ This section contains the containerization of a Next.js application. The impleme
    ```bash
    docker compose up -d --build
    ```
-3. Open your web browser and access the application at:
+3. Open web browser and access the application at:
    **http://localhost:8080**
    *(You should see the "Hello, Docker!" heading).*
 
@@ -136,16 +136,16 @@ graph TD
 ## Prerequisites
 1. **OpenTofu** (`tofu` CLI) installed.
 2. **AWS CLI** configured with appropriate IAM permissions.
-3. *Optional but Recommended:* S3 Bucket and DynamoDB table if you wish to initialize the remote backend for state locking.
+3. S3 Bucket and DynamoDB table to initialize the remote backend for state locking.
 
 ## Implementation & How-To Notes
 
 ### Step 1: Authentication & Setup
-Ensure your AWS CLI is authenticated and configured. Open your terminal and run:
+Ensure AWS CLI is authenticated and configured. Open terminal and run:
 ```bash
 aws configure
 ```
-*(Provide your AWS Access Key, Secret Key, and set the default region, e.g., `ap-southeast-1`)*
+*(Provide AWS Access Key, Secret Key, and set the default region, e.g., `ap-southeast-1`)*
 
 ### Step 2: Install OpenTofu
 Download the official installer
@@ -169,7 +169,7 @@ sudo apt-get update && sudo apt-get install -y tofu
 ```
 
 ### Step 3: Initialize OpenTofu
-Initialize the working directory. This step downloads the required AWS provider plugins and configures the remote state backend (S3 & DynamoDB state locking).
+Initialize the working directory. This step downloads the required AWS provider plugins and configures the remote state backend.
 ```bash
 tofu init
 ```
@@ -182,21 +182,21 @@ use this backend unless the backend configuration changes.
 ```
 
 ### Step 4: Validate and Plan Configuration
-Validate the code syntax and preview the infrastructure changes OpenTofu will execute in your AWS environment.
+I prefer use tofu validate to validate the code syntax, then use tofu plan to preview the infrastructure changes OpenTofu will execute.
 ```bash
 tofu validate
 tofu plan
 ```
 
 ### Step 5: Apply and Provision Resources
-Deploy the infrastructure to AWS. OpenTofu will prompt for your confirmation before proceeding.
+Deploy the infrastructure to AWS. OpenTofu will prompt confirmation before proceeding.
 ```bash
 tofu apply
 ```
-*(Type `yes` when prompted. Please wait 1-2 minutes for the EC2 instance to fully provision and the Nginx user_data script to finish executing).*
+*(Type `yes` when prompted.).*
 
 ### Step 6: Verify the Deployment
-Once the deployment is complete, OpenTofu will display the `instance_public_ip` in the terminal output. You can verify the web server is running by using `curl` or opening the IP in your web browser:
+Once the deployment is complete, OpenTofu will display the `instance_public_ip` in the terminal output. Verify the web server is running by using `curl` or opening the IP in web browser:
 ```bash
 C:\Users\gngsp>curl 52.221.235.210
 <h1>Hello, OpenTofu!</h1>
@@ -209,4 +209,4 @@ To prevent ongoing AWS Free Tier charges, safely clean up and destroy all provis
 ```bash
 tofu destroy
 ```
-*(Type `yes` when prompted. This will automatically and securely tear down the VPC, Security Groups, and the EC2 instance).*
+*(Type `yes` when prompted.).*
